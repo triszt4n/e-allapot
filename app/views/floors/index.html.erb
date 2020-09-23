@@ -1,0 +1,11 @@
+<h1>Floors#index</h1>
+
+<table>
+<% @floors.each do |floor| %>
+    <tr>
+        <td>
+            <%= link_to "Floor No. #{floor}", floor_path(floor) %>
+        </td>
+    </tr>
+<% end %>
+</table>
