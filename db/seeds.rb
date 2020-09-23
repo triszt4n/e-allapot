@@ -8,17 +8,23 @@
 
 require 'faker'
 
-user_count = 100
-user_count.times do |i|
-    User.create name: Faker::Name.name, email: Faker::Internet.email, age: (18..26).to_a.sample
-    puts "#{i} / #{user_count}"
-end
-
 floor_count = 18
 room_per_floor = 16
+user_room = 4
+contract_per_user = 3
+
 floor_count.times do |f|
     room_per_floor.times do |r|
-        Room.create floor: f, number: r
+        room = Room.create floor: f, number: r
+
+        user_room.times do |i|
+            user = User.create name: Faker::Name.name, email: Faker::Internet.email, age: (18..26).to_a.sample
+
+            contract_per_user.times do |c|
+                Contract.create user: user, room: room, year: 2015 + c
+            end
+        end
+
         puts "#{room_per_floor * f + r} / #{floor_count * room_per_floor}"
     end
 end
